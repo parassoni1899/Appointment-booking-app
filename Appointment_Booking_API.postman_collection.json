@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "c9411dc8-57fc-4661-9eed-129a4168fb25",
+		"name": "Appointment Booking API",
+		"description": "API collection for testing the Appointment Booking Go application.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Set Coach Availability",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"coach_id\": 1,\n    \"day\": \"Tuesday\",\n    \"timezone\": \"America/New_York\",\n    \"start_time\": \"09:00\",\n    \"end_time\": \"14:00\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/coaches/availability",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"coaches",
+						"availability"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Get Available Slots",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/slots?coach_id=1&date=2025-10-28",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"slots"
+					],
+					"query": [
+						{
+							"key": "coach_id",
+							"value": "1"
+						},
+						{
+							"key": "date",
+							"value": "2025-10-28"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Book an Appointment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"coach_id\": 1,\n    \"datetime\": \"2025-10-28T13:30:00Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Get User Bookings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/bookings?user_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "5. Cancel Booking",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/bookings/1?user_id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"bookings",
+                        "1"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
