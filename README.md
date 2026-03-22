@@ -18,31 +18,43 @@ A RESTful backend service built in Go to handle appointment bookings between coa
 
 ## Setup and Running Locally
 
+This project runs natively on Go and connects to a PostgreSQL database. Follow these exact steps to run it on your machine.
+
 ### 1. Prerequisites
-- [Go 1.22+](https://go.dev/dl/)
-- PostgreSQL database
+- **Go 1.22+**: Download and install from [go.dev](https://go.dev/dl/).
+- **PostgreSQL**: Download and install from [postgresql.org](https://www.postgresql.org/download/). Make sure to remember the password you set for the default `postgres` user during installation!
 
-### 2. Configure Database
-By default, the application connects to a local postgres database with the following credentials:
-`host=localhost user=postgres password=postgres dbname=booking port=5432 sslmode=disable TimeZone=UTC`
-
-Create a database named `booking`:
+### 2. Create the Database
+Before running the application, you must create a database named `booking`.
+1. Open **pgAdmin** or the **SQL Shell (psql)**.
+2. Run the following command:
 ```sql
 CREATE DATABASE booking;
 ```
 
-Alternatively, you can set the `DATABASE_URL` and `PORT` environment variables in a `.env` file at the root of the project:
+### 3. Setup Environment Variables
+By default, the application tries to connect using `host=localhost user=postgres password=postgres dbname=booking port=5432 sslmode=disable TimeZone=UTC`.
+
+If your PostgreSQL password is **not** `postgres`, you must specify it:
+1. Create a file named `.env` in the root folder of the project (`D:\Appointment-booking-app\.env`).
+2. Paste the following line inside the `.env` file, and replace `YOUR_ACTUAL_PASSWORD` with your real password:
 ```env
-DATABASE_URL=host=localhost user=youruser password=yourpassword dbname=booking port=5432 sslmode=disable TimeZone=UTC
+DATABASE_URL="host=localhost user=postgres password=YOUR_ACTUAL_PASSWORD dbname=booking port=5432 sslmode=disable TimeZone=UTC"
 PORT=8080
 ```
 
-### 3. Install Dependencies and Run
+### 4. Install Dependencies
+Open your terminal in the project directory and download the required Go modules:
 ```bash
 go mod tidy
+```
+
+### 5. Start the Server!
+Run the application using:
+```bash
 go run cmd/main.go
 ```
-*Note: The application will automatically run GORM migrations to create the required tables and seed the database with 2 dummy Users (ID: 1, 2) and 2 dummy Coaches (ID: 1, 2).*
+*Note: The application will automatically run GORM migrations to create all the required PostgreSQL tables automatically and seed the database with 2 dummy Users (ID: 1, 2) and 2 dummy Coaches (ID: 1, 2).*
 
 ---
 
