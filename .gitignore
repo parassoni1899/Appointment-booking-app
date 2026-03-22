@@ -1,0 +1,14 @@
+# Environment variables (DO NOT COMMIT THIS! Contains DB passwords)
+.env
+
+# Go binaries and build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+
+# OS specific files
+.DS_Store
+Thumbs.db
